@@ -1,0 +1,4 @@
+[web]
+app ansible_host=13.48.9.84 ansible_port=22 ansible_user=ubuntu
+[db]
+postgres ansible_host=13.48.81.75 ansible_port=22 ansible_user=ubuntu

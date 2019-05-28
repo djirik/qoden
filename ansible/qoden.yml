@@ -1,0 +1,33 @@
+- hosts: web
+  vars:
+    pip_install_packages:
+      - name: docker
+  roles:
+  - role: geerlingguy.docker
+    docker_edition: ce
+    docker_users:
+    - ubuntu
+  - role: geerlingguy.pip
+
+- hosts: web
+  tasks: 
+  - name: start app
+    docker_container:
+      name: app
+      image: nginx
+      state: started
+      ports: 
+      - "80:80"
+
+- hosts: db
+  roles:
+  - role: geerlingguy.postgresql
+    postgresql_service_state: started
+    postgresql_service_enabled: true
+    postgresql_users:
+    - name: qoden
+      password: "{{pg_pass}}"
+      role_attr_flags: "NOSUPERUSER,NOCREATEDB,NOREPLICATION,NOCREATEROLE,NOBYPASSRLS"
+    postgresql_databases:
+    - name: qoden
+      owner: qoden

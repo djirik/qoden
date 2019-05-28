@@ -1,0 +1,6 @@
+.creds
+env.sh
+rootkey.csv
+ssh-keys
+ansible/vars/pg.yaml
+terraform/.terraform
